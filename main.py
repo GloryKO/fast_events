@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from routes.users import user_router
 from routes.events import event_router
 import uvicorn 
+from database.connection import conn
 
 app = FastAPI()
 
@@ -10,7 +11,10 @@ app = FastAPI()
 app.include_router(user_router, prefix="/user")
 app.include_router(event_router,prefix="/event")
 
+@app.on_event("startup") #create a db connection on start of the app.
+def on_startup():
+    conn()
+
 
 if __name__ == "__main__":
- uvicorn.run("main:app", host="0.0.0.0", port=8080,
- reload=True)
+ uvicorn.run("main:app", reload=True)
