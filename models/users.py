@@ -27,9 +27,9 @@ class User(Document):
     class Settings:
         name = "users"
 
-class UserSignIn(BaseModel):
-    email: EmailStr
-    password : str
+# class UserSignIn(BaseModel):
+#     email: EmailStr
+#     password : str
     # class Config:
     #     schema_extra = {
     #     "example": {
@@ -38,5 +38,9 @@ class UserSignIn(BaseModel):
     #     "events": [],
     #     }
     #     }
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
 
 
